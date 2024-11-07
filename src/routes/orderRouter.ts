@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { verifyToken } from '../middleware/auth';
-import generateOrderNumber from '../utils/generateOrderNumber';
+import generateOrderNumber from '../utils/generateOrderNumber'; 
 import jwt from 'jsonwebtoken';
 import isAdmin from '../middleware/isAdmin';
 

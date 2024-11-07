@@ -16,7 +16,7 @@ router.route('/products')
     console.log(products)
     res.status(200).json(products);
 })
-    .post(async (req: Request, res: Response) => {
+    .post(verifyToken, isAdmin, async (req: Request, res: Response) => {
         const {
             name = "No name",
             description = "No description",
