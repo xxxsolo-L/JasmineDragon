@@ -13,7 +13,6 @@ model Category {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Product   Product[]
-
 }
 
 model Order {

@@ -6,6 +6,7 @@ import userRoutes from './src/routes/everyRoutes';
 import productsRouter from './src/routes/productsRouter'
 import authRouter from './src/routes/authRouter'
 import orderRouter from "./src/routes/orderRouter";
+import categoryRouter from "./src/routes/categoryRouter";
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use('/api', userRoutes);
 app.use('/api', productsRouter)
 app.use('/api', authRouter)
 app.use('/api', orderRouter)
+app.use('/api', categoryRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, TypeScript with PostgreSQL!');
