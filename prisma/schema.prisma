@@ -13,6 +13,8 @@ model Category {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Product   Product[]
+  subCategories SubCategory[]
+
 }
 
 model Order {
@@ -76,7 +78,9 @@ model SubCategory {
   name      String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  Product   Product[]
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  Product    Product[]
 }
 
 model User {

@@ -51,3 +51,16 @@ PATCH /orders/:id
 
 Удалить заказ
 DELETE /orders/:id      !!!!!!!
+
+
+1. Маршрут для создания подкатегории (POST /categories/:categoryId/subcategories)
+Создаёт подкатегорию, связанную с определённой категорией, переданной через categoryId.
+
+2. Маршрут для получения подкатегорий категории (GET /categories/:categoryId/subcategories)
+Возвращает список подкатегорий для конкретной категории.
+
+3. Маршрут для обновления подкатегории (PUT /categories/:categoryId/subcategories/:subCategoryId)
+Обновляет подкатегорию, используя subCategoryId и categoryId.
+
+4. Маршрут для удаления подкатегории (DELETE /categories/:categoryId/subcategories/:subCategoryId)
+Удаляет подкатегорию по её ID. //all done

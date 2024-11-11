@@ -116,6 +116,80 @@ router.route('/categories')
         }
     });
 
+router.route('/categories/:categoryId/subcategories')
+    .post(verifyToken, isAdmin, async (req: Request, res: Response): Promise<void> => {
+        const { categoryId } = req.params;
+        const { name } = req.body;
+
+        if (!name) {
+            res.status(400).json({ error: 'Subcategory name is required' });
+            return;
+        }
+
+        try {
+            const newSubCategory = await prisma.subCategory.create({
+                data: {
+                    name,
+                    categoryId: Number(categoryId),
+                },
+            });
+            res.status(201).json(newSubCategory);
+        } catch (error) {
+            console.error('Error creating subcategory:', error);
+            res.status(500).json({ error: 'Failed to create subcategory' });
+        }
+    })
+
+    .get(async (req: Request, res: Response): Promise<void> => {
+    const { categoryId } = req.params;
+
+    try {
+        const subCategories = await prisma.subCategory.findMany({
+            where: { categoryId: Number(categoryId) },
+        });
+        res.status(200).json(subCategories);
+    } catch (error) {
+        console.error('Error fetching subcategories:', error);
+        res.status(500).json({ error: 'Failed to fetch subcategories' });
+    }
+});
+
+
+router.route('/categories/:categoryId/subcategories/:subCategoryId')
+    .put(verifyToken, isAdmin, async (req: Request, res: Response): Promise<void> => {
+        const { categoryId, subCategoryId } = req.params;
+        const { name } = req.body;
+
+        if (!name) {
+            res.status(400).json({ error: 'Subcategory name is required' });
+            return;
+        }
+
+        try {
+            const updatedSubCategory = await prisma.subCategory.update({
+                where: { id: Number(subCategoryId) },
+                data: { name, categoryId: Number(categoryId) },
+            });
+            res.status(200).json(updatedSubCategory);
+        } catch (error) {
+            console.error('Error updating subcategory:', error);
+            res.status(500).json({ error: 'Failed to update subcategory' });
+        }
+    })
+
+    .delete(verifyToken, isAdmin, async (req: Request, res: Response): Promise<void> => {
+        const { subCategoryId } = req.params;
+
+        try {
+            await prisma.subCategory.delete({
+                where: { id: Number(subCategoryId) },
+            });
+            res.status(200).json({ message: 'Subcategory deleted successfully' });
+        } catch (error) {
+            console.error('Error deleting subcategory:', error);
+            res.status(500).json({ error: 'Failed to delete subcategory' });
+        }
+    });
 
 
 export default router;
