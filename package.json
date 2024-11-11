@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "generate": "prisma generate",
+    "deploy": "npm run generate && ts-node server.ts",
+    "build": "src",
     "dev": "node dist/server.js",
     "start": "ts-node server.ts"
   },
